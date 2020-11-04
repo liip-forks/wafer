@@ -35,18 +35,12 @@ def render_author(author):
 def authors_help():
     _ = ugettext  # This function will be wrapped for lazy evaluation
     text = []
-    text.append(_("The speakers presenting the talk."))
     if not settings.WAFER_PUBLIC_ATTENDEE_LIST:
         text.append(_(
-            "To ensure attendee privacy, you will only be able to see "
-            "yourself and authors that have been added to the talk by the "
-            "conference organisers. "
-            "If you will have other co-authors, add a note in the notes "
-            "field, so the organisers can add them to your talk."
+            "Each session need a facilitator to ensure everyone gets heard and to encourage dialogue. "
         ))
     text.append(_(
-        "<strong>You, as the talk submitter, will be the talk's corresponding "
-        "author.</strong>"
+        "<strong>You can either add yourself as facilitator or ask for one in the Notes below.</strong>"
     ))
     return ' '.join(text)
 
