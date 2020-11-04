@@ -35,18 +35,12 @@ def render_author(author):
 def authors_help():
     _ = ugettext  # This function will be wrapped for lazy evaluation
     text = []
-    text.append(_("The speakers presenting the talk."))
     if not settings.WAFER_PUBLIC_ATTENDEE_LIST:
         text.append(_(
-            "To ensure attendee privacy, you will only be able to see "
-            "yourself and authors that have been added to the talk by the "
-            "conference organisers. "
-            "If you will have other co-authors, add a note in the notes "
-            "field, so the organisers can add them to your talk."
+            "Each session needs a facilitator to ensure everyone gets heard and to encourage dialogue. "
         ))
     text.append(_(
-        "<strong>You, as the talk submitter, will be the talk's corresponding "
-        "author.</strong>"
+        "<strong>You can either add yourself as facilitator or ask for one in the Notes below.</strong>"
     ))
     return ' '.join(text)
 
@@ -93,8 +87,8 @@ class TalkType(models.Model):
 
     class Meta:
         ordering = ['order', 'id']
-        verbose_name = _('talk type')
-        verbose_name_plural = _('talk types')
+        verbose_name = _('Session type')
+        verbose_name_plural = _('Session types')
 
     def css_class(self):
         """Return a string for use as a css class name"""
@@ -135,11 +129,11 @@ class Talk(models.Model):
 
     class Meta:
         permissions = (
-            ("view_all_talks", "Can see all talks"),
+            ("view_all_talks", "Can see all sessions"),
             ("edit_private_notes", "Can edit the private notes fields"),
         )
-        verbose_name = _('talk')
-        verbose_name_plural = _('talks')
+        verbose_name = _('session')
+        verbose_name_plural = _('sessions')
 
     TALK_STATUS = (
         (ACCEPTED, _('Accepted')),
@@ -153,7 +147,7 @@ class Talk(models.Model):
 
     talk_id = models.AutoField(primary_key=True)
     talk_type = models.ForeignKey(
-        TalkType, verbose_name=_("talk type"), null=True, blank=True, on_delete=models.SET_NULL)
+        TalkType, verbose_name=_("session type"), null=True, blank=True, on_delete=models.SET_NULL)
     track = models.ForeignKey(
         Track, verbose_name=_("track"), null=True, blank=True, on_delete=models.SET_NULL)
 
@@ -161,10 +155,8 @@ class Talk(models.Model):
 
     abstract = MarkupField(
         _("abstract"),
-        help_text=_("Write two or three paragraphs describing your talk. "
-                    "Who is your audience? What will they get out of it? "
-                    "What will you cover?<br />"
-                    "You can use Markdown syntax."))
+        help_text=_("Share your thoughts on the session propose "
+                    "to help others decide if they want to join the session."))
 
     notes = models.TextField(
         _("notes"),
@@ -194,7 +186,7 @@ class Talk(models.Model):
 
     authors = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name='talks',
-        verbose_name=_("authors"),
+        verbose_name=_("facilitator"),
         help_text=lazy(authors_help, str))
 
     video = models.BooleanField(
@@ -359,12 +351,15 @@ class TalkUrl(models.Model):
     url = models.URLField()
     talk = models.ForeignKey(Talk, related_name='urls',
                              on_delete=models.CASCADE)
+    class Meta:
+        verbose_name = 'Session url'
+        verbose_name_plural = 'Session urls'
 
 
 @reversion.register(follow=('scores',))
 class Review(models.Model):
     talk = models.ForeignKey(Talk, on_delete=models.CASCADE,
-                             verbose_name=_('talk'),
+                             verbose_name=_('session'),
                              related_name='reviews')
     reviewer = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  verbose_name=_('reviewer'),

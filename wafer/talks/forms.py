@@ -96,8 +96,9 @@ class TalkForm(forms.ModelForm):
         else:
             self.fields['talk_type'] = TalkCategorisationField(
                 model=TalkType,
-                initial=self.initial.get('talk_type')
+                initial=self.initial.get('talk_type'),
             )
+            self.fields['talk_type'].label = "Session type"
 
         if not settings.WAFER_VIDEO:
             self.fields.pop('video')
@@ -117,7 +118,7 @@ class TalkForm(forms.ModelForm):
                     submit_button,
                     HTML('<a href="%s" class="btn btn-danger">%s</a>'
                          % (reverse('wafer_talk_withdraw', args=(instance.pk,)),
-                            _('Withdraw Talk')))))
+                            _('Withdraw Session')))))
         else:
             self.helper.add_input(submit_button)
 

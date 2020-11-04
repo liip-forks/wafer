@@ -61,7 +61,7 @@
       </p>
     {% endif %}
     <p>
-      {% blocktrans trimmed with talk_type=object.talk_type.name|default:_('Talk') %}
+      {% blocktrans trimmed with talk_type=object.talk_type.name|default:_('Session') %}
         Type:
         {{ talk_type }}
       {% endblocktrans %}
@@ -128,7 +128,7 @@
       <div id="notes" class="card mb-3">
         <div class="card-header">
           {% blocktrans trimmed %}
-            <h2>Talk Notes</h2>
+            <h2>Session Notes</h2>
             <p>(The following is not visible to attendees.)</p>
           {% endblocktrans %}
         </div>

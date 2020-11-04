@@ -1,9 +1,9 @@
 {% extends "wafer/base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Talk Types" %} - {{ WAFER_CONFERENCE_NAME }}{% endblock %}
+{% block title %}{% trans "Session Types" %} - {{ WAFER_CONFERENCE_NAME }}{% endblock %}
 {% block content %}
 <section class="wafer wafer-talk-types">
-  <h1>{% trans 'Talk Types' %}</h1>
+  <h1>{% trans 'Session Types' %}</h1>
     {% if object_list.count > 0 %}
       <dl class="talk-type-list">
         {% for type in object_list %}
@@ -12,7 +12,7 @@
         {% endfor %}
       </dl>
     {% else %}
-      <p>{% trans 'No talk types defined.' %}</p>
+      <p>{% trans 'No session types defined.' %}</p>
     {% endif %}
 </section>
 {% endblock %}

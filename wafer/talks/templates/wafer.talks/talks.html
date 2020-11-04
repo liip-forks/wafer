@@ -1,7 +1,7 @@
 {% extends "wafer/base.html" %}
 {% load i18n %}
 {% load review %}
-{% block title %}{% trans "Talks" %} - {{ WAFER_CONFERENCE_NAME }}{% endblock %}
+{% block title %}{% trans "Sessions" %} - {{ WAFER_CONFERENCE_NAME }}{% endblock %}
 {% block content %}
 <section class="wafer wafer-talks">
   {% regroup talk_list by talk_type.name as grouped_talks %}
@@ -9,7 +9,7 @@
     {% if type %}
       <h1>{{ type }}</h1>
     {% else %}
-      <h1>{% trans 'Talks' %}</h1>
+      <h1>{% trans 'Sessions' %}</h1>
     {% endif %}
     <div class="wafer list">
       {% for talk in talks %}
@@ -24,7 +24,7 @@
           {% elif talk.reject %}
             <span class="badge badge-danger" title="{% trans 'Not accepted' %}">{{ talk.status }}</span>
           {% elif talk.cancelled %}
-            <span class="badge badge-warning" title="{% trans 'Talk Cancelled' %}">{{ talk.status }}</span>
+            <span class="badge badge-warning" title="{% trans 'Session Cancelled' %}">{{ talk.status }}</span>
           {% elif talk.provisional %}
             <span class="badge badge-success" title="{% trans 'Provisionally Accepted' %}">{{ talk.status }}</span>
           {% endif %}

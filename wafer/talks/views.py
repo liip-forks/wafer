@@ -175,7 +175,7 @@ class TalkWithdraw(EditOwnTalksMixin, DeleteView):
         talk.status = WITHDRAWN
         talk.save()
         revisions.set_user(self.request.user)
-        revisions.set_comment("Talk Withdrawn")
+        revisions.set_comment("Session Withdrawn")
         return HttpResponseRedirect(self.success_url)
 
 
