@@ -152,9 +152,7 @@ class Talk(models.Model):
         Track, verbose_name=_("track"), null=True, blank=True, on_delete=models.SET_NULL)
 
     title = models.CharField(_("title"), max_length=1024)
-    # DELETE ME AFTER USE
-    import ipdb; ipdb.set_trace()
-    # ###################
+
     abstract = MarkupField(
         _("abstract"),
         help_text=_("Share your thoughts on the session propose "
