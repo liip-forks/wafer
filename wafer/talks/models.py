@@ -87,8 +87,8 @@ class TalkType(models.Model):
 
     class Meta:
         ordering = ['order', 'id']
-        verbose_name = _('talk type')
-        verbose_name_plural = _('talk types')
+        verbose_name = _('Session type')
+        verbose_name_plural = _('Session types')
 
     def css_class(self):
         """Return a string for use as a css class name"""
@@ -129,11 +129,11 @@ class Talk(models.Model):
 
     class Meta:
         permissions = (
-            ("view_all_talks", "Can see all talks"),
+            ("view_all_talks", "Can see all sessions"),
             ("edit_private_notes", "Can edit the private notes fields"),
         )
-        verbose_name = _('talk')
-        verbose_name_plural = _('talks')
+        verbose_name = _('session')
+        verbose_name_plural = _('sessions')
 
     TALK_STATUS = (
         (ACCEPTED, _('Accepted')),
@@ -147,7 +147,7 @@ class Talk(models.Model):
 
     talk_id = models.AutoField(primary_key=True)
     talk_type = models.ForeignKey(
-        TalkType, verbose_name=_("talk type"), null=True, blank=True, on_delete=models.SET_NULL)
+        TalkType, verbose_name=_("session type"), null=True, blank=True, on_delete=models.SET_NULL)
     track = models.ForeignKey(
         Track, verbose_name=_("track"), null=True, blank=True, on_delete=models.SET_NULL)
 
@@ -356,7 +356,7 @@ class TalkUrl(models.Model):
 @reversion.register(follow=('scores',))
 class Review(models.Model):
     talk = models.ForeignKey(Talk, on_delete=models.CASCADE,
-                             verbose_name=_('talk'),
+                             verbose_name=_('session'),
                              related_name='reviews')
     reviewer = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  verbose_name=_('reviewer'),

@@ -61,7 +61,7 @@
       </p>
     {% endif %}
     <p>
-      {% blocktrans trimmed with talk_type=object.talk_type.name|default:_('Talk') %}
+      {% blocktrans trimmed with talk_type=object.talk_type.name|default:_('Session') %}
         Type:
         {{ talk_type }}
       {% endblocktrans %}

@@ -5,7 +5,7 @@
 {% block content %}
 <section class="wafer wafer-talk-edit">
   {% if can_edit %}
-    <h1>{% trans "Edit Talk" %}</h1>
+    <h1>{% trans "Edit Session" %}</h1>
     {% with corresponding_author_name=object.corresponding_author.userprofile.display_name %}
       {% url 'wafer_user_profile' username=object.corresponding_author.username as corresponding_author_url %}
       {% blocktrans trimmed %}
@@ -13,11 +13,11 @@
       {% endblocktrans %}
     {% endwith %}
   {% else %}
-    <h1>{% trans "Talk Submission" %}</h1>
+    <h1>{% trans "Session Submission" %}</h1>
   {% endif %}
   {% if not can_edit and not can_submit %}
     {% blocktrans trimmed %}
-      <em>Talk submission is closed</em>
+      <em>Session submission is closed</em>
     {% endblocktrans %}
   {% else %}
     {% url 'wafer_user_edit_profile' form.user as edit_bio_url %}
@@ -36,7 +36,7 @@
         {% blocktrans trimmed %}
           Please
           <a href="{{ edit_bio_url }}">add a speaker biography</a>
-          before submitting a talk.
+          before submitting a session.
         {% endblocktrans %}
       </div>
     {% endif %}
