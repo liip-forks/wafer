@@ -155,10 +155,8 @@ class Talk(models.Model):
 
     abstract = MarkupField(
         _("abstract"),
-        help_text=_("Write two or three paragraphs describing your talk. "
-                    "Who is your audience? What will they get out of it? "
-                    "What will you cover?<br />"
-                    "You can use Markdown syntax."))
+        help_text=_("Share your thoughts on the session propose "
+                    "to help others decide if they want to join the session."))
 
     notes = models.TextField(
         _("notes"),
@@ -188,7 +186,7 @@ class Talk(models.Model):
 
     authors = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name='talks',
-        verbose_name=_("facilitators"),
+        verbose_name=_("facilitator"),
         help_text=lazy(authors_help, str))
 
     video = models.BooleanField(
